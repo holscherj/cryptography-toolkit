@@ -4,7 +4,7 @@
 
 int main() {
   std::string message = "RSA Encryption Test";
-  RSAEncryption* rsa = new RSAEncryption(2048);
+  RSAEncryption* rsa = new RSAEncryption(4096);
   std::cout << "Original Message: " << message << std::endl;
   
   std::string cipherText = rsa->encrypt(message);

@@ -8,8 +8,11 @@
 // Constructor
 RSAEncryption::RSAEncryption(int keyLength)
     : pkey(nullptr, EVP_PKEY_free), keyLength(keyLength) {
-    if keyLen
-    generateKeys();
+    if(keyLength == 2048 || keyLength == 4096) {
+        generateKeys();
+    } else {
+        throw std::runtime_error("Invalid Key Length. Please use 2048 or 4096");
+    }
 }
 
 // Method to generate keys

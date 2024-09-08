@@ -19,7 +19,7 @@ $(TARGET): $(OBJS)
 
 # Clean rule to remove generated files
 clean:
-	rm -f $(TARGET) $(OBJS)
+	rm -f $(TARGET) $(OBJS) *.txt
 
 # Phony targets
 .PHONY: all clean

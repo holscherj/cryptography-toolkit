@@ -7,12 +7,8 @@
 #include <openssl/aes.h>
 
 // Constructor
-AESEncryption::AESEncryption(const std::string& key, const std::string& iv):
-  ctx(EVP_CIPHER_CTX_new(), EVP_CIPHER_CTX_free), key(key), iv(iv) {
-    if(key.size() != 32 || iv.size() != 16) {
-      throw std::runtime_error("Invalid Key or IV size. Please use a 32-byte key and a 16-byte IV.");
-    }
-}
+AESEncryption::AESEncryption():
+  ctx(EVP_CIPHER_CTX_new(), EVP_CIPHER_CTX_free), key("32"), iv("16") {}
 
 std::string AESEncryption::encrypt(const std::string& message) const {
   return crypt(message, true);

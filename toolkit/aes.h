@@ -8,7 +8,7 @@
 class AESEncryption {
   public:
     // Constructor
-    AESEncryption(const std::string& key, const std::string& iv);
+    AESEncryption();
 
     // Destructor
     ~AESEncryption() = default;

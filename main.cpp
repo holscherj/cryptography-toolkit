@@ -24,7 +24,47 @@ int main() {
     std::getline(std::cin, tool);
 
     if(tool == "RSA") {
-      // get key size
+      std::cout << "Please enter key size (2048 or 4096)" << std::endl;
+      int keySize;
+      while(true) {
+        std::cin >> keySize;
+        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+
+        if(keySize != 2048 && keySize != 4096) {
+          std::cout << "Please enter a valid key size" << std::endl;
+          continue;
+        } else {
+          break;
+        }
+      }
+
+      rsaPtr = new RSAEncryption(keySize);
+      std::string message;
+      std::cout << "Please enter the message to be encrypted" << std::endl;
+      std::getline(std::cin, message);
+      outFile << "Encrypting: " << message << std::endl;
+      outFile << "------------------------------------------------------" << std::endl;
+
+      std::string encrypted = rsaPtr->encrypt(message);
+      outFile << encrypted << std::endl;
+
+      char decrypt;
+      std::cout << "Would you like to decrypt the encryption? (y/n)" << std::endl;
+      std::cin >> decrypt;
+      std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+
+      if(decrypt == 'y') {
+        std::string message = rsaPtr->decrypt(encrypted);
+        outFile << std::endl;
+        outFile << "Decrypted Ciphertext: " << message << std::endl;
+        outFile << "------------------------------------------------------" << std::endl;
+        outFile << std::endl;
+        outFile << std::endl << "RSA DONE" << std::endl;
+        outFile << "######################################################" << std::endl;
+        outFile << std::endl;
+      } else {
+        delete rsaPtr;
+      }
     } else if(tool == "AES") {
       aesPtr = new AESEncryption();
       std::string message;
@@ -47,13 +87,27 @@ int main() {
         outFile << "Decrypted Ciphertext: " << message << std::endl;
         outFile << "------------------------------------------------------" << std::endl;
         outFile << std::endl;
-      } else {
-        delete aesPtr;
         outFile << std::endl << "AES DONE" << std::endl;
         outFile << "######################################################" << std::endl;
+        outFile << std::endl;
+      } else {
+        delete aesPtr;
       }
     } else if(tool == "SHA-256") {
-      // do hash
+      shaPtr = new SHA256();
+      std::string message;
+      std::cout << "Please enter the message to be hashed" << std::endl;
+      std::getline(std::cin, message);
+      outFile << "Hashing: " << message << std::endl;
+      outFile << "------------------------------------------------------" << std::endl;
+
+      std::string hashed = shaPtr->hash(message);
+      outFile << hashed << std::endl;
+
+      delete shaPtr;
+      outFile << std::endl << "SHA DONE" << std::endl;
+      outFile << "######################################################" << std::endl;
+      outFile << std::endl;
     } else {
       std::cout << "Please ensure tool is entered exactly as prompted, without the quotes" << std::endl;
       continue;

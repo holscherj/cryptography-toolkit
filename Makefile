@@ -1,6 +1,6 @@
 # Compiler and flags
 CXX = g++
-CXXFLAGS = -I/usr/local/openssl/include -Itoolkit
+CXXFLAGS = -std=c++14 -I/usr/local/openssl/include -Itoolkit
 LDFLAGS = -L/usr/local/openssl/lib -lssl -lcrypto
 TARGET = main
 SRCS = main.cpp toolkit/rsa.cpp toolkit/aes.cpp toolkit/sha256.cpp
